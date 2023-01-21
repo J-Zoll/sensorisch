@@ -1,6 +1,5 @@
 from database import db
 import sqlalchemy as sa
-import json
 
 class Sensor(db.Model):
     id = sa.Column(sa.Integer, primary_key=True)
