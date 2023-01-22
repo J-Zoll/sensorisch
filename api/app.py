@@ -5,6 +5,7 @@ from database import db
 import database
 
 from endpoints.sensor import SensorsEndpoint, SensorEndpoint
+from endpoints.feature import FeaturesEndpoint, FeatureEndpoint
 
 app = Flask(__name__)
 api = Api(app)
@@ -18,7 +19,9 @@ database.setup(app=app)
 # add endpoints
 api.add_resource(SensorsEndpoint, "/sensor")
 api.add_resource(SensorEndpoint, "/sensor/<int:id>")
+api.add_resource(FeaturesEndpoint, "/feature")
+api.add_resource(FeatureEndpoint, "/feature/<int:id>")
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=3333)
