@@ -2,6 +2,7 @@ from database import db
 import sqlalchemy as sa
 
 class Sensor(db.Model):
+    __tablename__ = "sensor"
     id = sa.Column(sa.Integer, primary_key=True)
     name = sa.Column(sa.String, nullable=False)
     description = sa.Column(sa.String, nullable=True)
