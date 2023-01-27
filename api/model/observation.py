@@ -1,6 +1,7 @@
 from database import db
 import sqlalchemy as sa
 
+
 class Observation(db.Model):
     __tablename__ = "observation"
     sensor_id = sa.Column(sa.Integer, db.ForeignKey("sensor.id", ondelete="CASCADE"), primary_key=True)
@@ -10,8 +11,8 @@ class Observation(db.Model):
 
     def serialize(self):
         return dict(
-            sensor_id = self.sensor_id,
-            feature_id = self.feature_id,
-            timestamp = self.timestamp,
-            value = self.value
+            sensor_id=self.sensor_id,
+            feature_id=self.feature_id,
+            timestamp=self.timestamp,
+            value=self.value
         )
