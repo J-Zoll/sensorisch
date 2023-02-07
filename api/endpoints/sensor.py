@@ -13,19 +13,18 @@ class SensorsEndpoint(Resource):
         data = request.json
 
         name = data["name"]
+        thing_id = data["thing_id"]
+        feature_id = data["feature_id"]
 
         description = None
         if "description" in data.keys():
             description = data["description"]
 
-        location = None
-        if "location" in data.keys():
-            location = data["location"]
-
         sensor = Sensor(
+            thing_id=thing_id,
+            feature_id=feature_id,
             name=name,
-            description=description,
-            location=location
+            description=description
         )
         db.session.add(sensor)
         db.session.commit()
