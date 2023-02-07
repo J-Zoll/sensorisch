@@ -13,7 +13,6 @@ class ObservationsEndpoint(Resource):
         start = request.args.get("start", default=DEFAULT_START, type=str)
         end = request.args.get("end", default=DEFAULT_END, type=str)
         sensor_id = request.args.get("sensor_id", default=None, type=int)
-        feature_id = request.args.get("feature_id", default=None, type=int)
 
         query = db.select(Observation)
         query = query.filter(Observation.timestamp >= start)
@@ -22,9 +21,6 @@ class ObservationsEndpoint(Resource):
         if sensor_id is not None:
             query = query.filter(Observation.sensor_id == sensor_id)
 
-        if feature_id is not None:
-            query = query.filter(Observation.feature_id == feature_id)
-
         observations_list = db.session.execute(query).scalars()
         return [o.serialize() for o in observations_list], 200
 
@@ -32,7 +28,6 @@ class ObservationsEndpoint(Resource):
         data = request.json
         observation = Observation(
             sensor_id=data["sensor_id"],
-            feature_id=data["feature_id"],
             timestamp=data["timestamp"],
             value=data["value"]
         )
